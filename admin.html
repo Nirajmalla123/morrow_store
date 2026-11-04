@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#f6f5f0">
+  <title>Store admin — morrow</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="admin.css">
+  <script src="admin.js" defer></script>
+</head>
+<body>
+  <section class="login-page" id="loginPage">
+    <a class="brand" href="/">morrow<span>✳</span></a>
+    <form class="login-card" id="loginForm">
+      <span class="overline">A LITTLE BEHIND THE SCENES</span>
+      <h1>Welcome back.</h1>
+      <p>Sign in to manage your store.</p>
+      <label>Email address<input name="email" type="email" autocomplete="username" required maxlength="254"></label>
+      <label>Password<input name="password" type="password" autocomplete="current-password" required maxlength="200"></label>
+      <button class="primary-button" type="submit">Sign in <span>↗</span></button>
+      <div class="form-message" id="loginMessage" role="status" aria-live="polite"></div>
+      <a class="back-link" href="/">← Back to the storefront</a>
+    </form>
+  </section>
+
+  <div class="admin-layout" id="adminLayout" hidden>
+    <aside class="sidebar">
+      <a class="brand" href="/">morrow<span>✳</span></a>
+      <div class="sidebar-label">YOUR STORE</div>
+      <nav class="side-nav" aria-label="Admin sections">
+        <button class="side-link selected" data-view="overview"><span>◫</span> Overview</button>
+        <button class="side-link" data-view="products"><span>◇</span> Products</button>
+        <button class="side-link" data-view="orders"><span>▤</span> Orders <b id="pendingBadge" hidden>0</b></button>
+        <button class="side-link" data-view="customers"><span>♡</span> Customers</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="signed-in"><span class="avatar">M</span><span><b>Store admin</b><small id="adminEmail"></small></span></div>
+        <button class="signout-button" id="logoutButton">Sign out <span>↗</span></button>
+      </div>
+    </aside>
+
+    <main class="admin-main">
+      <header class="topbar"><div class="breadcrumb">Morrow <span>/</span> <b id="viewTitle">Overview</b></div><a href="/" class="store-link" target="_blank" rel="noreferrer">View storefront ↗</a></header>
+      <div class="admin-content">
+        <section class="view-panel" id="overviewView">
+          <div class="page-heading"><div><span class="overline">HERE'S THE LATEST</span><h1>Your store, at a glance.</h1><p>A little overview of how things are going.</p></div></div>
+          <div class="stat-grid">
+            <article class="stat-card"><span>Products</span><strong id="productStat">—</strong><small>Pieces in your collection</small><i>◇</i></article>
+            <article class="stat-card"><span>Orders</span><strong id="orderStat">—</strong><small>Orders placed by customers</small><i>▤</i></article>
+            <article class="stat-card"><span>Customers</span><strong id="customerStat">—</strong><small>Lovely people who shop with you</small><i>♡</i></article>
+            <article class="stat-card"><span>Sales</span><strong id="salesStat">—</strong><small>Excluding cancelled orders</small><i>↗</i></article>
+          </div>
+          <div class="overview-grid">
+            <section class="panel-card"><div class="panel-heading"><div><span class="overline">JUST IN</span><h2>Recent orders</h2></div><button class="subtle-button" data-go="orders">All orders →</button></div><div class="table-wrap"><table><thead><tr><th>ORDER</th><th>CUSTOMER</th><th>TOTAL</th><th>STATUS</th></tr></thead><tbody id="recentOrders"></tbody></table></div></section>
+            <section class="note-card"><span class="note-star">✳</span><span class="overline">A QUICK NOTE</span><h2>Good things take a little care.</h2><p>Keep an eye on your new orders and low-stock favorites. Every order is a happy little hello from a customer.</p><button class="subtle-button" data-go="products">Check your collection →</button></section>
+          </div>
+        </section>
+
+        <section class="view-panel" id="productsView" hidden>
+          <div class="page-heading"><div><span class="overline">YOUR COLLECTION</span><h1>Products</h1><p>Keep your favorite finds fresh and in stock.</p></div><button class="primary-button" id="addProductButton">＋ Add a product</button></div>
+          <section class="panel-card"><div class="panel-heading"><div><h2>All products <span id="productsCount" class="count-pill">0</span></h2></div><input class="table-search" id="productSearch" type="search" placeholder="Search products..." aria-label="Search products"></div><div class="table-wrap"><table><thead><tr><th>PRODUCT</th><th>CATEGORY</th><th>PRICE</th><th>STOCK</th><th></th></tr></thead><tbody id="productsTable"></tbody></table></div></section>
+        </section>
+
+        <section class="view-panel" id="ordersView" hidden>
+          <div class="page-heading"><div><span class="overline">THE GOOD STUFF</span><h1>Orders</h1><p>View orders and keep everyone in the loop.</p></div></div>
+          <section class="panel-card"><div class="panel-heading"><div><h2>All orders <span id="ordersCount" class="count-pill">0</span></h2></div></div><div class="table-wrap"><table><thead><tr><th>ORDER</th><th>CUSTOMER</th><th>ITEMS</th><th>TOTAL</th><th>STATUS</th><th>UPDATE STATUS</th></tr></thead><tbody id="ordersTable"></tbody></table></div></section>
+        </section>
+
+        <section class="view-panel" id="customersView" hidden>
+          <div class="page-heading"><div><span class="overline">THE PEOPLE BEHIND THE ORDERS</span><h1>Customers</h1><p>Everyone who's checked out with Morrow.</p></div></div>
+          <section class="panel-card"><div class="panel-heading"><div><h2>Your customers <span id="customersCount" class="count-pill">0</span></h2></div><input class="table-search" id="customerSearch" type="search" placeholder="Search customers..." aria-label="Search customers"></div><div class="table-wrap"><table><thead><tr><th>CUSTOMER</th><th>EMAIL</th><th>PHONE</th><th>ORDERS</th><th>SPENT</th><th>JOINED</th></tr></thead><tbody id="customersTable"></tbody></table></div></section>
+        </section>
+        <div class="notice" id="adminNotice" role="status" aria-live="polite"></div>
+      </div>
+    </main>
+  </div>
+
+  <dialog class="product-dialog" id="productDialog">
+    <form id="productForm">
+      <div class="dialog-heading"><div><span class="overline">MAKE IT YOURS</span><h2 id="productDialogTitle">Add a product</h2></div><button class="dialog-close" type="button" id="closeProductDialog" aria-label="Close dialog">✕</button></div>
+      <input type="hidden" name="id">
+      <div class="field-grid">
+        <label class="wide-field">Product name<input name="name" required maxlength="160" placeholder="Sunday Midi Dress"></label>
+        <label>Category<select name="category" required><option value="">Choose category</option><option>Dresses</option><option>Tops</option><option>Bottoms</option><option>Layers</option></select></label>
+        <label>Price (USD)<input name="price" type="number" min="0" max="99999999" step="0.01" required></label>
+        <label>Stock quantity<input name="stock" type="number" min="0" max="2147483647" step="1" required></label>
+        <label>Product badge<input name="badge" maxlength="80" placeholder="BESTSELLER"></label>
+        <label class="wide-field">Photo URL <span class="field-hint">Optional HTTPS image URL; uploaded photos take priority.</span><input name="image_url" type="url" maxlength="1000" placeholder="https://..."></label>
+        <label class="wide-field">Description<textarea name="description" rows="3" maxlength="1000" placeholder="A little something special..."></textarea></label>
+        <label class="wide-field">Product photos <span class="field-hint">JPEG, PNG, WebP or GIF · up to 5 MB each</span><input id="photoInput" name="photos" type="file" accept="image/jpeg,image/png,image/webp,image/gif" multiple></label>
+      </div>
+      <div class="photo-list" id="photoList"></div>
+      <div class="dialog-actions"><button class="secondary-button" type="button" id="cancelProduct">Cancel</button><button class="primary-button" type="submit" id="saveProductButton">Save product <span>↗</span></button></div>
+      <div class="form-message" id="productMessage" role="status" aria-live="polite"></div>
+    </form>
+  </dialog>
+</body>
+</html>

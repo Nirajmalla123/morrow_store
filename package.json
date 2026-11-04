@@ -1,0 +1,20 @@
+{
+  "name": "morrow-womenswear-store",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Morrow women's clothing storefront and private admin dashboard",
+  "scripts": {
+    "start": "node server.js",
+    "create-admin": "node create-admin.js",
+    "check": "node --check server.js && node --check create-admin.js && node --check script.js && node --check admin.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "dotenv": "^16.6.1",
+    "express": "^5.1.0",
+    "express-rate-limit": "^8.1.0",
+    "helmet": "^8.1.0",
+    "multer": "^2.0.2",
+    "mysql2": "^3.14.4"
+  }
+}

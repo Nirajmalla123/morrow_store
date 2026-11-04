@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f5f0">
+  <meta name="description" content="Easy-to-love women's clothing for wherever the day takes you. Find your new favorite dresses, tops, bottoms, and layers at Morrow.">
+  <title>morrow — clothes to live in</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">A little treat for your first order: <strong>15% off with HELLOMORROW</strong><span>✳</span></div>
+  <header class="site-header">
+    <button class="icon-button mobile-menu-button" id="menuToggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+    <a class="wordmark" href="#" aria-label="Morrow women's clothing home">morrow<span>✳</span></a>
+    <nav class="main-nav" id="mainNav" aria-label="Main navigation">
+      <a href="#shop" data-nav-category="All">Shop all</a>
+      <a href="#shop" data-nav-category="Dresses">Dresses</a>
+      <a href="#shop" data-nav-category="Tops">Tops</a>
+      <a href="#shop" data-nav-category="Bottoms">Bottoms</a>
+      <a href="#shop" data-nav-category="Layers">Layers</a>
+      <a href="#story">Our story</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button search-toggle" id="searchToggle" aria-label="Search products">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+      </button>
+      <button class="icon-button cart-trigger" id="cartToggle" aria-label="Open shopping bag">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l1 13H4L5 8Z"></path><path d="M9 9V6a3 3 0 0 1 6 0v3"></path></svg>
+        <span class="cart-count" id="cartCount">0</span>
+      </button>
+    </div>
+  </header>
+  <div class="search-bar" id="searchBar">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"></circle><path d="m16 16 5 5"></path></svg>
+    <input id="searchInput" type="search" placeholder="Find your new favorite..." aria-label="Search women's clothing">
+    <button id="searchClose" class="search-close" aria-label="Close search">✕</button>
+  </div>
+
+  <main>
+    <section class="hero" aria-label="Welcome to Morrow women's clothing">
+      <div class="hero-copy">
+        <span class="eyebrow"><span class="eyebrow-star">✳</span> A little more you, every day</span>
+        <h1>Get dressed.<br>Feel <em>lovely.</em></h1>
+        <p>Easy-to-love clothes for wherever the day takes you. Comfy favorites, happy colors, and pieces that feel like you.</p>
+        <a class="button button-dark" href="#shop">Find your new favorite <span>↗</span></a>
+        <div class="hero-note"><span class="note-avatars">✿ &nbsp;☼ &nbsp;♡</span><span>Made for real life, and all of you</span></div>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&w=1400&q=85" alt="Woman wearing an effortless blue outfit on a city street">
+        <div class="hero-sticker"><span>FEEL<br>GOOD</span><b>look like<br>yourself</b><i>✳</i></div>
+        <div class="hero-caption">Made to wear on repeat <span>— The everyday edit</span></div>
+      </div>
+      <div class="hero-scribble" aria-hidden="true">take it<br>slow <span>↘</span></div>
+    </section>
+
+    <section class="trust-strip" aria-label="Our promises">
+      <div><span>✳</span> Easy, everyday favorites</div><i></i><div><span>♡</span> Comfy from the first wear</div><i></i><div><span>☼</span> Sizes XS–XL</div><i></i><div><span>✿</span> Packed with a little love</div>
+    </section>
+
+    <section class="shop-section" id="shop">
+      <div class="section-heading">
+        <div><span class="eyebrow">Outfits start here</span><h2>Meet your new <em>favorites.</em></h2></div>
+        <a class="text-link desktop-shop-link" href="#products">Shop all clothes <span>↗</span></a>
+      </div>
+      <div class="shop-toolbar">
+        <div class="category-list" id="categoryList" role="group" aria-label="Filter products by category">
+          <button class="category-chip active" data-category="All">Shop all <span>08</span></button>
+          <button class="category-chip" data-category="Dresses">Dresses</button>
+          <button class="category-chip" data-category="Tops">Tops</button>
+          <button class="category-chip" data-category="Bottoms">Bottoms</button>
+          <button class="category-chip" data-category="Layers">Layers</button>
+        </div>
+        <label class="sort-control">Sort by
+          <select id="sortSelect" aria-label="Sort products">
+            <option value="featured">Featured</option>
+            <option value="price-low">Price: low to high</option>
+            <option value="price-high">Price: high to low</option>
+            <option value="name">Name: A to Z</option>
+          </select>
+        </label>
+      </div>
+      <div class="product-grid" id="products" aria-live="polite"></div>
+      <p class="empty-state" id="emptyState" hidden>No clothes found. Try another search or category.</p>
+      <div class="shop-bottom"><span>Good clothes. Good days. Wear what feels like you.</span><span>Showing <b id="productCount">8</b> pieces</span></div>
+    </section>
+
+    <section class="story-section" id="story">
+      <div class="story-photo"><img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=1200&q=85" alt="Woman wearing a bright, relaxed everyday outfit"></div>
+      <div class="story-copy">
+        <span class="eyebrow"><span class="eyebrow-star">✳</span> Clothes for real life</span>
+        <h2>Your style.<br><em>Your kind of lovely.</em></h2>
+        <p>Getting dressed should feel good. We pick out the easy layers, feel-good fits, and little details that help you show up as yourself.</p>
+        <p>No special occasion needed. These are the pieces you reach for on regular Tuesdays and your very best days.</p>
+        <a class="text-link" href="#shop">Find something that feels like you <span>↗</span></a>
+        <div class="signature">With love, <span>the morrow team</span> ♡</div>
+      </div>
+    </section>
+
+    <section class="newsletter">
+      <div class="newsletter-spark" aria-hidden="true">✳</div>
+      <span class="eyebrow">A happy little inbox</span>
+      <h2>Good things, <em>occasionally.</em></h2>
+      <p>Fresh outfits, styling ideas, and 15% off your first order. Only the nice stuff.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <label class="sr-only" for="emailInput">Your email address</label>
+        <input id="emailInput" type="email" placeholder="Your email address" required>
+        <button type="submit">Count me in <span>↗</span></button>
+      </form>
+      <div class="newsletter-message" id="newsletterMessage" aria-live="polite"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand"><a class="wordmark" href="#">morrow<span>✳</span></a><p>Clothes to live in.<br>Picked with love, made for you.</p><div class="social-links"><a href="#shop" aria-label="Instagram">ig</a><a href="#shop" aria-label="Pinterest">p</a><a href="#shop" aria-label="TikTok">tk</a></div></div>
+      <div class="footer-column"><h3>Find your fit</h3><a href="#shop" data-nav-category="All">Shop all clothes</a><a href="#shop" data-nav-category="Dresses">Dresses</a><a href="#shop" data-nav-category="Tops">Tops</a><a href="#shop" data-nav-category="Bottoms">Bottoms</a></div>
+      <div class="footer-column"><h3>Here to help</h3><a href="mailto:hello@morrow.example">Get in touch</a><a href="#story">Shipping & returns</a><a href="#story">FAQs</a><a href="#story">Find your order</a></div>
+      <div class="footer-postcard"><span>✳</span><p>Life's too short<br>to wear things that<br><em>don't feel like you.</em></p><b>— a little reminder from us</b></div>
+    </div>
+    <div class="footer-bottom"><span>© 2025 morrow. Clothes to live in.</span><div><a href="#story">Privacy</a><a href="#story">Terms</a><span>Made with ♡, wherever you are</span></div></div>
+  </footer>
+
+  <div class="drawer-backdrop" id="drawerBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Shopping bag" aria-hidden="true">
+    <div class="drawer-header"><div><span class="eyebrow">Your good things</span><h2>Your bag <span id="drawerItemCount">(0)</span></h2></div><button class="icon-button drawer-close" id="cartClose" aria-label="Close shopping bag">✕</button></div>
+    <div class="shipping-progress"><span>You're <b id="shippingRemaining">$75.00</b> away from free shipping</span><div><i id="shippingProgressBar"></i></div></div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-empty" id="cartEmpty"><span>✳</span><h3>Your bag is taking a breather.</h3><p>Fill it with something lovely.</p><button class="button button-dark" id="continueShopping">Keep looking <span>↗</span></button></div>
+    <div class="cart-footer" id="cartFooter"><div class="subtotal-row"><span>Subtotal</span><strong id="cartSubtotal">$0.00</strong></div><p>Shipping and any discounts are calculated at checkout.</p><button class="button button-dark checkout-button" id="checkoutButton">Continue to checkout <span>↗</span></button><button class="continue-link" id="continueShoppingFooter">Keep browsing</button></div>
+  </aside>
+  <dialog class="checkout-dialog" id="checkoutDialog" aria-labelledby="checkoutTitle">
+    <form class="checkout-form" id="checkoutForm">
+      <div class="drawer-header"><div><span class="eyebrow">One last little thing</span><h2 id="checkoutTitle">Where should it go?</h2></div><button class="icon-button" id="checkoutClose" type="button" aria-label="Close checkout">✕</button></div>
+      <label for="checkoutName">Your name</label><input id="checkoutName" name="name" autocomplete="name" maxlength="160" required>
+      <label for="checkoutEmail">Email address</label><input id="checkoutEmail" name="email" type="email" autocomplete="email" maxlength="254" required>
+      <label for="checkoutPhone">Phone <span>(optional)</span></label><input id="checkoutPhone" name="phone" type="tel" autocomplete="tel" maxlength="40">
+      <label for="checkoutAddress">Shipping address</label><textarea id="checkoutAddress" name="address" autocomplete="street-address" rows="3" maxlength="1000" required></textarea>
+      <p class="checkout-note">This demo saves your order but does not process a payment.</p>
+      <p class="checkout-error" id="checkoutError" role="status" aria-live="polite"></p>
+      <button class="button button-dark checkout-button" type="submit">Place your order <span>↗</span></button>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
